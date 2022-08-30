@@ -6,6 +6,9 @@ function enter() {
     const userName = $('#userName').val();
 
     // ユーザ名が未入力でないかチェックする
+    if (!userName || !userName.match(/\S/g)) {
+        return alert("いきなり空文字は取れねえだろうよい！");
+    }
 
     $('form').submit();
 }
