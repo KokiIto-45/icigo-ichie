@@ -11,4 +11,4 @@ module.exports = function (socket, io) {
         io.sockets.emit('receiveMessageEvent', data);
 
     });
-}
+};
