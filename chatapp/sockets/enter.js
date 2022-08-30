@@ -6,6 +6,6 @@ module.exports = function (socket, io) {
         if (!data) {
             return;
         }
-        io.sockets.emit('receiveEnterEvent', data);
+        socket.broadcast.emit('receiveEnterEvent', data);
     });
 };
