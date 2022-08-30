@@ -9,6 +9,8 @@ function publish() {
     // 投稿内容を送信
     socket.emit('sendMessageEvent',{message:message,userName:userName});
 
+    $('#message').val("")
+
 };
 
 // サーバから受信した投稿メッセージを画面上に表示する
