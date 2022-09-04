@@ -1,18 +1,44 @@
-<div class="container">
-    <div class="row">
-        <h1>Node Chat サンプル</h1>
-    </div>
-    <div class="row">
-        <form method="post" action="/room">
-            <div class="index-user_name">
-                ユーザ名
-                <input type="text" id="userName" name="userName" class="index-user_name_text">
-            </div>
-            <div class="index-enter">
-                <input type="button" value="入室する" class="common-button index-enter_button" onclick="enter();">
-            </div>
-        </form>
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <p class="title">Node Chat サンプル</p>
+        </div>
+        <div class="row">
+            <form method="post" action="/room" class="login-form">
+                <div class="index-user_name">
+                    <input type="text" id="userName" name="userName" class="index-user_name_text" placeholder="Username" pattern=".*\S+.*"  required>
+                </div>
+                <div class="index-enter">
+                    <input type="button" value="Enter!" class="common-button index-enter_button" onclick="enter();">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
+
 <script src="/javascripts/index.js"></script>
+
+<style scoped>
+.container{
+    background-color:white;
+    width:auto;
+    height:auto;
+    border-radius:10px;
+    box-shadow: 3px 7px 13px -10px #65789f;
+}
+.title{
+    font-size:3em;
+    color: #2476f2;
+}
+.login-form{
+    width:100%;
+}
+input::placeholder {
+  color: #cdd2d8;
+}
+input::-ms-input-placeholder {
+  color: #cdd2d8;
+}
+
+</style>
