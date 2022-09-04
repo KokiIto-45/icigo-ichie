@@ -5,8 +5,12 @@
     <div class="row">
         <form method="post" action="/">
             <div class="room-login_user">
-                ログインユーザ：{{userName}}さん
+                ログインユーザ：{{userName}}さん<span id="userId"></span>
+      
                 <input id="userName" type="hidden" value={{userName}}>
+            </div>
+             <div>
+                <input id="toUserId" type="text" placeholder="メッセージを送りたい人のIDを入力してください"  class="index-user_name_text">
             </div>
             <div class="room-message">
                 <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
@@ -30,3 +34,13 @@
 <script src="/javascripts/publish.js"></script>
 <script src="/javascripts/memo.js"></script>
 <script src="/javascripts/exit.js"></script>
+
+<style>
+.msg-me{
+    color:blue;
+}
+.msg-member{
+    color:black;
+}
+</style>
+
