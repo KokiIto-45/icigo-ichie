@@ -9,7 +9,7 @@ function memo() {
     // メモが入力されていない場合は投稿しない
     if (message && message.match(/\S/g)) {
         // メモの内容を投稿
-        const memo = userName + "さんのメモ:" + message;
+        const memo = userName + "さんのメモ:<br>" + message;
         $('#thread').prepend('<p>' + memo + '</p>');
         $('#message').val("");
     }
