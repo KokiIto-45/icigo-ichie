@@ -9,10 +9,9 @@ function publish() {
     //入力した他人のIDを取得
     const toUserId = $('#toUserId').val();
 
-    const userId = String($('#userId').text().replace("(id: " ,"").replace(")",""));
 
     // 投稿内容を送信
-    socket.emit('sendMessageEvent',{message:message,userName:userName,toUserId:toUserId,userId:userId});
+    socket.emit('sendMessageEvent',{message:message,userName:userName});
 
     $('#message').val("");
 

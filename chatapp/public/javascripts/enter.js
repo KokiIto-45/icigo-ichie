@@ -13,6 +13,3 @@ function enter() {
 socket.on('receiveEnterEvent', function (data) {
     $('#thread').prepend('<p>' + data + '</p>');
 });
-socket.on('receiveEnterEventMyself', function (data) {
-    $('#userId').html(`(id: ${data})`);
-});
