@@ -32,10 +32,21 @@ $(function() {
     $(document).on('click', '.member-name', function(){
         // ユーザ名取得
         const toUserName = $(this).html();
+        const publishTypeDM = '<div>' + toUserName + 'へDM' + '</div>'
+                            + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>';
         // ユーザID取得
         const toUserId = $(this).next().val();
-        $('#publishType').html(toUserName + 'へDM');
+        
+        $('#publishType').html(publishTypeDM);
         $('#toUserId').val(toUserId);
+    });
+
+    // DM解除ボタン押下時の処理
+    $(document).on('click', '.btn-cancel-publish-type', function(){
+        // 投稿タイプを「全員に」
+        $('#publishType').html('全員に送信');
+        // DM先ユーザIDを空に
+        $('#toUserId').val('');
     });
 });
 

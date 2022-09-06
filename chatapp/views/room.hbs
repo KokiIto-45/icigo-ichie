@@ -11,7 +11,7 @@
                 <input id="userId" type="hidden" value="">
             </div>
             <div style="margin:0;">
-                <p id="publishType" style="margin:0;">全員に送信</p>
+                <div id="publishType" style="margin:0;">全員に送信</div>
 
                 <input id="toUserId" type="hidden" value="">
             </div>
@@ -50,5 +50,24 @@
 }
 .member-name:hover {
     text-decoration: underline;
+}
+#publishType {
+    display: flex;
+    justify-content: space-between;
+}
+#publishType div {
+    margin: 0;
+}
+.btn-cancel-publish-type {
+    width: 5rem;
+    background-color: white;
+    font-weight: 300;
+    font-size: 14px;
+    color: grey;
+    border: 1px grey solid;
+}
+.btn-cancel-publish-type:hover {
+    color: black;
+    border: 1px black solid;
 }
 </style>
