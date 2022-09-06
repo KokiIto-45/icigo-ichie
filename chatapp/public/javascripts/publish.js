@@ -6,9 +6,6 @@ function publish() {
     const userName = $('#userName').val();
     // 入力されたメッセージを取得
     const message = $('#message').val();
-    //入力した他人のIDを取得
-    const toUserId = $('#toUserId').val();
-
 
     // 投稿内容を送信
     socket.emit('sendMessageEvent',{message:message,userName:userName});

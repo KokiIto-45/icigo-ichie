@@ -6,8 +6,10 @@ module.exports = function (socket, io) {
         if (!userName) {
             return;
         }
+        console.log(userName)
      
         socket.broadcast.emit('receiveEnterEvent', message);
+
       
     });
 };

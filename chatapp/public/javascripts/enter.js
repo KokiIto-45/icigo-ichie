@@ -5,7 +5,9 @@ $(document).ready(enter());
 function enter() {
     // 入力されたユーザ名を取得する
     const userName = $('#userName').val();
+    const message = userName + 'さんが入室しました'
     // 入室メッセージイベントを送信する
+    socket.emit('enter', message);
     socket.emit('enter', userName);
 }
 
