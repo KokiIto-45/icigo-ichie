@@ -8,11 +8,13 @@ function publish() {
     const userId = $('#userId').val();
     // 入力されたメッセージを取得
     const message = $('#message').val();
+    // ダイレクトメッセージ先のユーザ名取得
+    const toUserName = $('#toUserName').html();
     // ダイレクトメッセージ先のユーザID取得
     const toUserId = $('#toUserId').val();
 
     // 投稿内容を送信
-    socket.emit('sendMessageEvent',{message: message, userName: userName, userId: userId, toUserId: toUserId});
+    socket.emit('sendMessageEvent',{message: message, userName: userName, userId: userId, toUserName: toUserName, toUserId: toUserId});
 
     $('#message').val("");
 
@@ -32,7 +34,7 @@ $(function() {
     $(document).on('click', '.member-name', function(){
         // ユーザ名取得
         const toUserName = $(this).html();
-        const publishTypeDM = '<div>' + toUserName + 'へDM' + '</div>'
+        const publishTypeDM = '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
                             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>';
         // ユーザID取得
         const toUserId = $(this).next().val();
@@ -56,6 +58,7 @@ $(function() {
     message: <投稿文>, 
     userName: <ユーザ名>, 
     userId: <ユーザID>, 
+    toUserName: <ダイレクトメッセージ先ユーザ名>,
     toUserId: <ダイレクトメッセージ先ユーザID>,
     publishDate: <投稿日>,
 }
@@ -68,14 +71,16 @@ socket.on('receiveMyMessageEvent', function (data) {
     if (data.toUserId) {
         // ダイレクトメッセージの場合
         post += '<span class="badge badge-dm">DM</span>'
-                + '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>';
+                + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
+                + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
+                + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.toUserName + '</span>';
     } else {
         post += '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>';    
     }
     post += '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p>' + data.message  + '</p>'
-            + '</div>'
+            + '</div>';
     $('#thread').prepend(post);
 })
 // 他人への処理

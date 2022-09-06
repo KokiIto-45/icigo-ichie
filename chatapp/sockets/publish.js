@@ -7,6 +7,7 @@ module.exports = function (socket, io) {
         message: <投稿文>, 
         userName: <ユーザ名>, 
         userId: <ユーザID>, 
+        toUserName: <ダイレクトメッセージ先ユーザ名>,
         toUserId: <ダイレクトメッセージ先ユーザID>
     }
     */
