@@ -20,13 +20,13 @@ function publish() {
 
 
 // サーバから受信した投稿メッセージを画面上に表示する
-
-socket.on('receiveMessageEvent', function (data) {
+socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    //自分のメッセージとメンバーのメッセージを区別
-    if(data.userId===publish()){
-        $('#thread').prepend('<p class="msg-me">' + data.userName +'さん:'+data.message + '</p>');
-    }else{
-        $('#thread').prepend('<p class="msg-member">' + data.userName +'さん:'+data.message + '</p>');
-    }
+    $('#thread').prepend('<p class="my-msg">' + data.userName +'さん:'+data.message + '</p>');
 })
+socket.on('receiveMemberMessageEvent', function (data) {
+    // 画面上にメッセージを表示
+    $('#thread').prepend('<p class="member-msg">' + data.userName +'さん:'+data.message + '</p>');
+})
+
+
