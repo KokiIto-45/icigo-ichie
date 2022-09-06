@@ -64,13 +64,15 @@ $(function() {
 socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
     let post = '<div>';
+    post += '<p style="margin: 0;">';
     if (data.toUserId) {
         // ダイレクトメッセージの場合
-        post += '<p style="margin: 0;">ダイレクトメッセージ</p>'
+        post += '<span class="badge badge-dm">DM</span>'
+                + '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>';
+    } else {
+        post += '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>';    
     }
-    post += '<p style="margin: 0;">'
-            + '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<span style="color:grey;">' + data.publishDate + '</span>'
+    post += '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p>' + data.message  + '</p>'
             + '</div>'
@@ -80,16 +82,16 @@ socket.on('receiveMyMessageEvent', function (data) {
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
     let post = '<div>';
+    post += '<p style="margin: 0;">';
     if (data.toUserId) {
         // ダイレクトメッセージの場合
-        post += '<p style="margin: 0;">' + data.userName + 'さんからのダイレクトメッセージ' + '</p>'
+        post += '<span class="badge badge-dm">DM</span>';
     }
-    post += '<p style="margin: 0;">'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+    post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p>' + data.message  + '</p>'
-            + '</div>'
+            + '</div>';
     $('#thread').prepend(post);
 })
