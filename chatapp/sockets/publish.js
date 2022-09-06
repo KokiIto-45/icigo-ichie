@@ -15,6 +15,8 @@ module.exports = function (socket, io) {
         } else {
             // 全クライアントが受信するメッセージ表示イベント（receiveMessageEvent）を送信する
             io.sockets.emit('receiveMessageEvent', {userId:userId,userName:data.userName,message:data.message})
+            io.socket.emit('receiveMessageEvent',{data})
         }
+
     });
 };
