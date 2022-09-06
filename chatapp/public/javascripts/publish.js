@@ -6,9 +6,11 @@ function publish() {
     const userName = $('#userName').val();
     // 入力されたメッセージを取得
     const message = $('#message').val();
+    // ダイレクトメッセージ先のユーザID取得
+    const toUserId = $('#toUserId').val();
 
     // 投稿内容を送信
-    socket.emit('sendMessageEvent',{message:message,userName:userName});
+    socket.emit('sendMessageEvent',{message: message, userName: userName, toUserId: toUserId});
 
     $('#message').val("");
 
@@ -25,26 +27,42 @@ $(function() {
     });
 });
 
-// サーバから受信した投稿メッセージを画面上に表示する
+/*
+サーバから受信した投稿メッセージを画面上に表示する
+引数 data = {
+    message: <投稿文>, 
+    userName: <ユーザ名>, 
+    toUserId: <ダイレクトメッセージ先ユーザID>,
+    publishDate: <投稿日>,
+}
+*/
 socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    $('#thread').prepend('<div>'
-                            + '<p style="margin: 0;">'
-                                + '<span class="my-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
-                                + '<span style="color:grey;">' + data.publishDate + '</span>'
-                            + '</p>'
-                            + '<p>' + data.message  + '</p>'
-                        + '</div>');
+    let post = '<div>';
+    if (data.toUserId) {
+        // ダイレクトメッセージの場合
+        post += '<p style="margin: 0;">ダイレクトメッセージ</p>'
+    }
+    post += '<p style="margin: 0;">'
+            + '<span class="my-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+            + '<span style="color:grey;">' + data.publishDate + '</span>'
+            + '</p>'
+            + '<p>' + data.message  + '</p>'
+            + '</div>'
+    $('#thread').prepend(post);
 })
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    $('#thread').prepend('<div>'
-                            + '<p style="margin: 0;">'
-                                + '<span class="member-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
-                                + '<span style="color:grey;">' + data.publishDate + '</span>'
-                            + '</p>'
-                            + '<p>' + data.message  + '</p>'
-                        + '</div>');
+    let post = '<div>';
+    if (data.toUserId) {
+        // ダイレクトメッセージの場合
+        post += '<p style="margin: 0;">' + data.userName + 'さんからのダイレクトメッセージ' + '</p>'
+    }
+    post += '<p style="margin: 0;">'
+            + '<span class="member-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+            + '<span style="color:grey;">' + data.publishDate + '</span>'
+            + '</p>'
+            + '<p>' + data.message  + '</p>'
+            + '</div>'
+    $('#thread').prepend(post);
 })
-
-
