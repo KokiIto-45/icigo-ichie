@@ -85,7 +85,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
         post += '<p style="margin: 0;">' + data.userName + 'さんからのダイレクトメッセージ' + '</p>'
     }
     post += '<p style="margin: 0;">'
-            + '<span class="member-msg member-name" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
