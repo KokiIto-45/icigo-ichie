@@ -20,6 +20,5 @@ function enter() {
 }
 */
 socket.on('receiveEnterEvent', function (data) {
-    console.log(data)
     $('#thread').prepend('<p>' + data.message + '</p>');
 });
