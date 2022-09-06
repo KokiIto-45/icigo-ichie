@@ -1,5 +1,6 @@
 'use strict';
 
+
 $(document).ready(enter());
 // 入室メッセージをサーバに送信する
 function enter() {
