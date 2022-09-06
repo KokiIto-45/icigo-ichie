@@ -1,5 +1,6 @@
 'use strict';
 
+
 $(document).ready(enter());
 // 入室メッセージをサーバに送信する
 function enter() {
@@ -8,7 +9,6 @@ function enter() {
     const message = userName + 'さんが入室しました'
     // 入室メッセージイベントを送信する
     socket.emit('enter', message);
-    socket.emit('enter', userName);
 }
 
 // サーバから受信した入室メッセージを画面上に表示する
