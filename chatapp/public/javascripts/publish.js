@@ -14,6 +14,16 @@ function publish() {
 
 };
 
+$(function() {
+    $(document).on('keydown', 'body', function(e) {
+       if ( !(e.key == 'Enter' && (e.metaKey == true || e.ctrlKey == true ) ) ) return;
+
+        var $target = $(e.target);
+        if ($target.is('input') || $target.is('textarea') || $target.is('select')) {
+         publish();
+        }
+    });
+});
 
 // サーバから受信した投稿メッセージを画面上に表示する
 socket.on('receiveMyMessageEvent', function (data) {
