@@ -20,7 +20,7 @@ socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
     $('#thread').prepend('<div>'
                             + '<p style="margin: 0;">'
-                                + '<span style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+                                + '<span class="my-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
                                 + '<span style="color:grey;">' + data.publishDate + '</span>'
                             + '</p>'
                             + '<p>' + data.message  + '</p>'
@@ -28,7 +28,13 @@ socket.on('receiveMyMessageEvent', function (data) {
 })
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    $('#thread').prepend('<p class="member-msg">' + data.userName +'さん:'+data.message + '</p>');
+    $('#thread').prepend('<div>'
+                            + '<p style="margin: 0;">'
+                                + '<span class="member-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+                                + '<span style="color:grey;">' + data.publishDate + '</span>'
+                            + '</p>'
+                            + '<p>' + data.message  + '</p>'
+                        + '</div>');
 })
 
 
