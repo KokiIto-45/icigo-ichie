@@ -18,7 +18,13 @@ module.exports = function (socket, io) {
         data.publishDate = nowDate;
 
         // 全クライアントが受信するメッセージ表示イベント（receiveMessageEvent）を送信する
-        io.sockets.emit('receiveMessageEvent', data);
+        //自分だけに送信するメッセージ表示イベント
+        socket.emit('receiveMyMessageEvent',data);
+        //メンバー送信するメッセージ表示イベント
+        socket.broadcast.emit('receiveMemberMessageEvent',data)
+
+        
+
 
     });
 };

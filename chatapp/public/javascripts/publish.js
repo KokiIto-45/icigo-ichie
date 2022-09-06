@@ -6,15 +6,17 @@ function publish() {
     const userName = $('#userName').val();
     // 入力されたメッセージを取得
     const message = $('#message').val();
+
     // 投稿内容を送信
     socket.emit('sendMessageEvent',{message:message,userName:userName});
 
-    $('#message').val("")
+    $('#message').val("");
 
 };
 
+
 // サーバから受信した投稿メッセージを画面上に表示する
-socket.on('receiveMessageEvent', function (data) {
+socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
     $('#thread').prepend('<div>'
                             + '<p style="margin: 0;">'
@@ -24,3 +26,9 @@ socket.on('receiveMessageEvent', function (data) {
                             + '<p>' + data.message  + '</p>'
                         + '</div>');
 })
+socket.on('receiveMemberMessageEvent', function (data) {
+    // 画面上にメッセージを表示
+    $('#thread').prepend('<p class="member-msg">' + data.userName +'さん:'+data.message + '</p>');
+})
+
+
