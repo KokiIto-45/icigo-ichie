@@ -22,7 +22,6 @@ socket.on('receiveMyMessageEvent', function (data) {
 })
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    $('#thread').prepend('<p class="member-msg">' + data.userName +'さん:'+data.message + '</p>');
+    $('#thread').prepend('<p class="member-msg">' + data.userName +'さん:<br>'+data.message + '</p>');
 })
-
 
