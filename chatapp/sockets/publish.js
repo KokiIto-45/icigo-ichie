@@ -6,6 +6,7 @@ module.exports = function (socket, io) {
     引数 data = {
         message: <投稿文>, 
         userName: <ユーザ名>, 
+        userId: <ユーザID>, 
         toUserId: <ダイレクトメッセージ先ユーザID>
     }
     */

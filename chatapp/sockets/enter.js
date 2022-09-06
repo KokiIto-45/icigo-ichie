@@ -17,6 +17,9 @@ module.exports = function (socket, io) {
         const message = `${data.userName}（id: ${userId}）さんが入室しました`;
         data.userId = userId;
         data.message = message;
+        // 自身への処理
+        socket.emit('receiveEnterEventMyself', data);
+        // 他人への処理
         socket.broadcast.emit('receiveEnterEvent', data);
     });
 };

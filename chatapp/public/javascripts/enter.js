@@ -10,6 +10,18 @@ function enter() {
     socket.emit('enter', {'userName': userName});
 }
 
+/*
+自身への処理。自身のuserIdを格納する。
+引数 data = {
+    userName: <ユーザ名>,
+    userId: <ユーザID>,
+    message: <入室メッセージ>,
+}
+*/
+socket.on('receiveEnterEventMyself', function (data) {
+    $('#userId').val(data.userId);
+});
+
 
 /*
 サーバから受信した入室メッセージを画面上に表示する

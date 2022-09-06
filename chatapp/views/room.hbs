@@ -8,9 +8,12 @@
                 ログインユーザ：{{userName}}さん
       
                 <input id="userName" type="hidden" value={{userName}}>
+                <input id="userId" type="hidden" value="">
             </div>
-            <div>
-                <input id="toUserId" type="text" placeholder="メッセージを送りたい人のIDを入力してください"  class="index-user_name_text">
+            <div style="margin:0;">
+                <p id="publishType" style="margin:0;">全員に送信</p>
+
+                <input id="toUserId" type="hidden" value="">
             </div>
             <div class="room-message">
                 <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
@@ -41,5 +44,11 @@
 }
 .member-msg{
     color:black;
+}
+.member-name {
+    cursor: pointer;
+}
+.member-name:hover {
+    text-decoration: underline;
 }
 </style>

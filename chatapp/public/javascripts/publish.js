@@ -2,15 +2,17 @@
 
 // 投稿メッセージをサーバに送信する
 function publish() {
-    // ユーザ名を取得
+    // 自身のユーザ名を取得
     const userName = $('#userName').val();
+    // 自身のユーザIDを取得
+    const userId = $('#userId').val();
     // 入力されたメッセージを取得
     const message = $('#message').val();
     // ダイレクトメッセージ先のユーザID取得
     const toUserId = $('#toUserId').val();
 
     // 投稿内容を送信
-    socket.emit('sendMessageEvent',{message: message, userName: userName, toUserId: toUserId});
+    socket.emit('sendMessageEvent',{message: message, userName: userName, userId: userId, toUserId: toUserId});
 
     $('#message').val("");
 
@@ -25,6 +27,16 @@ $(function() {
          publish();
         }
     });
+
+    // 投稿のユーザ名クリック時の処理。その人へDMできるようにする。
+    $(document).on('click', '.member-name', function(){
+        // ユーザ名取得
+        const toUserName = $(this).html();
+        // ユーザID取得
+        const toUserId = $(this).next().val();
+        $('#publishType').html(toUserName + 'へDM');
+        $('#toUserId').val(toUserId);
+    });
 });
 
 /*
@@ -32,6 +44,7 @@ $(function() {
 引数 data = {
     message: <投稿文>, 
     userName: <ユーザ名>, 
+    userId: <ユーザID>, 
     toUserId: <ダイレクトメッセージ先ユーザID>,
     publishDate: <投稿日>,
 }
@@ -45,7 +58,7 @@ socket.on('receiveMyMessageEvent', function (data) {
         post += '<p style="margin: 0;">ダイレクトメッセージ</p>'
     }
     post += '<p style="margin: 0;">'
-            + '<span class="my-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+            + '<span class="my-msg" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p>' + data.message  + '</p>'
@@ -61,7 +74,8 @@ socket.on('receiveMemberMessageEvent', function (data) {
         post += '<p style="margin: 0;">' + data.userName + 'さんからのダイレクトメッセージ' + '</p>'
     }
     post += '<p style="margin: 0;">'
-            + '<span class="member-msg" style="font-weight:700;">' + data.userName + 'さん ' + '</span>'
+            + '<span class="member-msg member-name" style="font-weight:700; margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p>' + data.message  + '</p>'
