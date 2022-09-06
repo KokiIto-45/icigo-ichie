@@ -14,8 +14,11 @@ module.exports = function (socket, io) {
 
         // socket ID 取得
         const userId = socket.id;
-        const message = `${data.userName}（id: ${userId}）さんが入室しました`;
         data.userId = userId;
+
+        const message = '<span class="member-name">' + data.userName + 'さん' + '</span>'
+                        + '<input type="hidden" value="' + data.userId + '">'
+                        + '<span>が入室しました</span>';
         data.message = message;
         // 自身への処理
         socket.emit('receiveEnterEventMyself', data);
