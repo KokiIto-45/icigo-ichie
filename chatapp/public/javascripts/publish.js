@@ -36,6 +36,7 @@ $(function() {
     publishDate: <投稿日>,
 }
 */
+// 自身への処理
 socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
     let post = '<div>';
@@ -51,6 +52,7 @@ socket.on('receiveMyMessageEvent', function (data) {
             + '</div>'
     $('#thread').prepend(post);
 })
+// 他人への処理
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
     let post = '<div>';
