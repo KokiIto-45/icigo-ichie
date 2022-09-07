@@ -8,6 +8,12 @@
                 ログインユーザ：{{userName}}さん
       
                 <input id="userName" type="hidden" value={{userName}}>
+                <input id="userId" type="hidden" value="">
+            </div>
+            <div style="margin:0;">
+                <div id="publishType" style="margin:0;">全員に送信</div>
+
+                <input id="toUserId" type="hidden" value="">
             </div>
             <div class="room-message">
                 <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
@@ -38,5 +44,41 @@
 }
 .member-msg{
     color:black;
+}
+.member-name {
+    font-weight:700;
+    cursor: pointer;
+}
+.member-name:hover {
+    text-decoration: underline;
+}
+#publishType {
+    display: flex;
+    justify-content: space-between;
+}
+#publishType div {
+    margin: 0;
+}
+.btn-cancel-publish-type {
+    width: 5rem;
+    background-color: white;
+    font-weight: 300;
+    font-size: 14px;
+    color: grey;
+    border: 1px grey solid;
+}
+.btn-cancel-publish-type:hover {
+    color: black;
+    border: 1px black solid;
+}
+.badge {
+    background-color: grey;
+    color: white;
+    border-radius: 7px; 
+    font-size: 12px;
+    margin-right: 0.5rem;
+}
+.badge-dm {
+    background-color: #634ecc;
 }
 </style>
