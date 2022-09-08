@@ -7,9 +7,10 @@ module.exports = function (socket, io) {
         message: <投稿文>, 
         userName: <ユーザ名>, 
         userId: <ユーザID>, 
-        publishType: 'all' | 'dm',
+        publishType: 'all' | 'dm' | 'reply',
         toUserName: <ダイレクトメッセージ先ユーザ名> | '',
-        toUserId: <ダイレクトメッセージ先ユーザID> | ''
+        toUserId: <ダイレクトメッセージ先ユーザID> | '',
+        toText: <返信先投稿内容> | '',
     }
     */
     socket.on('sendMessageEvent', function (data) {
@@ -28,15 +29,15 @@ module.exports = function (socket, io) {
         data.publishDate = nowDate;
 
         //自分だけに送信するメッセージ表示イベント
-        socket.emit('receiveMyMessageEvent',data);
-        
+        socket.emit('receiveMyMessageEvent', data);
+
         //メンバー送信するメッセージ表示イベント
         if (data.publishType === 'dm' && data.toUserId) {
             // ダイレクトメッセージ
             io.to(data.toUserId).emit('receiveMemberMessageEvent', data);
         } else {
             // 全員に送信
-            socket.broadcast.emit('receiveMemberMessageEvent',data)
+            socket.broadcast.emit('receiveMemberMessageEvent', data)
         }
     });
 };
