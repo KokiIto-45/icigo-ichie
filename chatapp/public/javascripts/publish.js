@@ -155,7 +155,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p class="publish">' + data.message + '</p>'
-            + '<button type="button" class="btn-change-type-reply reply-button">返信</button>'
             + '</div>';
     } else if (data.publishType === 'reply') {
         // 返信の場合
