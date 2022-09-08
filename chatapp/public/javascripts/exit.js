@@ -15,3 +15,10 @@ function exit() {
 socket.on('receiveExitRoomEvent', function (data) {
     $('#thread').prepend('<p>' + data + '</p>');
 });
+
+socket.on('deleteOnlineUsersEvent', function(data) {
+    $('#onlineUsers').html('');
+    for (let i = 0; i < data.length; i++) {
+        $('#onlineUsers').prepend('<p>' + `${data[i].name}（id: ${data[i].id}）` + '</p>');
+    }
+})

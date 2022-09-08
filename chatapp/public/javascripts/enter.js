@@ -34,3 +34,10 @@ socket.on('receiveEnterEventMyself', function (data) {
 socket.on('receiveEnterEvent', function (data) {
     $('#thread').prepend('<p>' + data.message + '</p>');
 });
+
+socket.on('appendOnlineUsersEvent', function (data) {
+    $('#onlineUsers').html('');
+    for (let i = 0; i < data.length; i++) {
+        $('#onlineUsers').prepend('<p>' + `${data[i].name}（id: ${data[i].id}）` + '</p>');
+    }
+});
