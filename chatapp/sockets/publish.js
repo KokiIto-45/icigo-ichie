@@ -7,8 +7,9 @@ module.exports = function (socket, io) {
         message: <投稿文>, 
         userName: <ユーザ名>, 
         userId: <ユーザID>, 
-        toUserName: <ダイレクトメッセージ先ユーザ名>,
-        toUserId: <ダイレクトメッセージ先ユーザID>
+        publishType: 'all' | 'dm',
+        toUserName: <ダイレクトメッセージ先ユーザ名> | '',
+        toUserId: <ダイレクトメッセージ先ユーザID> | ''
     }
     */
     socket.on('sendMessageEvent', function (data) {
@@ -30,7 +31,7 @@ module.exports = function (socket, io) {
         socket.emit('receiveMyMessageEvent',data);
         
         //メンバー送信するメッセージ表示イベント
-        if (data.toUserId) {
+        if (data.publishType === 'dm' && data.toUserId) {
             // ダイレクトメッセージ
             io.to(data.toUserId).emit('receiveMemberMessageEvent', data);
         } else {
