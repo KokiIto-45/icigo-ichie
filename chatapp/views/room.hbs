@@ -11,9 +11,8 @@
                 <input id="userId" type="hidden" value="">
             </div>
             <div style="margin:0;">
-                <div id="publishType" style="margin:0;">全員に送信</div>
-
-                <input id="toUserId" type="hidden" value="">
+                <input id="publishType" type="hidden" value="all">
+                <div id="publishTypeMsg" style="margin:0;">全員に送信</div>
             </div>
             <div class="room-message">
                 <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
@@ -52,11 +51,11 @@
 .member-name:hover {
     text-decoration: underline;
 }
-#publishType {
+#publishTypeMsg {
     display: flex;
     justify-content: space-between;
 }
-#publishType div {
+#publishTypeMsg div {
     margin: 0;
 }
 .btn-cancel-publish-type {
