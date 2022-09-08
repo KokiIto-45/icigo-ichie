@@ -19,6 +19,15 @@ socket.on('receiveExitRoomEvent', function (data) {
 socket.on('deleteOnlineUsersEvent', function(data) {
     $('#onlineUsers').html('');
     for (let i = 0; i < data.length; i++) {
-        $('#onlineUsers').prepend('<p>' + `${data[i].name}（id: ${data[i].id}）` + '</p>');
+        let post = '<p>'
+        if (data[i].id === socket.id) {
+            post += '<span class="my-msg" style="font-weight:700;">' + data[i].name + 'さん' + '</span>'
+                    + '</p>';
+        } else {
+            post += '<span class="member-msg member-name">' + data[i].name + 'さん' + '</span>'
+                    + '<input type="hidden" value="' + data[i].id + '">'
+                    + '</p>';
+        }
+        $('#onlineUsers').prepend(post);
     }
 })
