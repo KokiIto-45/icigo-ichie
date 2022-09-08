@@ -159,10 +159,10 @@ socket.on('receiveMemberMessageEvent', function (data) {
             + '</div>';
     } else if (data.publishType === 'reply') {
         // 返信の場合
-        post += '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
-            + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.toUserName + '</span>'
+        post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
+            + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
+            + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.toUserName + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + '<p class="badge badge-reply-text">' + data.toText + '</p>' + 'への返信'
             + '<p class="publish">' + data.message + '</p>'
