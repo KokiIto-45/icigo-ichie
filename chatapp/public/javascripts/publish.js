@@ -59,7 +59,7 @@ $(function () {
         const toUserId = $(this).next().val();
         // 投稿タイプメッセージ
         const publishTypeMsgDM = '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
-            + '<button type="button" class="btn-cancel-publish-type reply-button">' + '解除' + '</button>'
+            + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
             + '<input id="toUserId" type="hidden" value="' + toUserId + '">';
         // 投稿タイプを「DM」に
         $('#publishType').val('dm');
