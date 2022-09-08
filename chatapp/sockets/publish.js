@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 module.exports = function (socket, io) {
     const postDate = require('../public/javascripts/memo')
     /*

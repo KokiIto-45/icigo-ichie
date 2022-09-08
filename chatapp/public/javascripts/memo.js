@@ -20,7 +20,7 @@ function memo() {
         // メモの内容を投稿
         $('#thread').prepend('<div>'
         + '<p style="margin: 0;">'
-            +'<span class="badge badge-dm">MEMO</span>'+ '<span class="my-msg" style="font-weight:700;">' + userName + 'さん:MEMO ' + '</span>'
+            +'<span class="badge badge-dm">MEMO</span>'+ '<span class="my-msg" style="font-weight:700;">' + userName + 'さん ' + '</span>'
             + '<span style="color:grey;">' + postDate() + '</span>'
         + '</p>'
         + '<p>' + message + '</p>'
