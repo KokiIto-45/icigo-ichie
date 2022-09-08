@@ -6,12 +6,31 @@ $(document).ready(enter());
 function enter() {
     // 入力されたユーザ名を取得する
     const userName = $('#userName').val();
-    const message = userName + 'さんが入室しました'
     // 入室メッセージイベントを送信する
-    socket.emit('enter', message);
+    socket.emit('enter', {'userName': userName});
 }
 
-// サーバから受信した入室メッセージを画面上に表示する
+/*
+自身への処理。自身のuserIdを格納する。
+引数 data = {
+    userName: <ユーザ名>,
+    userId: <ユーザID>,
+    message: <入室メッセージ>,
+}
+*/
+socket.on('receiveEnterEventMyself', function (data) {
+    $('#userId').val(data.userId);
+});
+
+
+/*
+サーバから受信した入室メッセージを画面上に表示する
+引数 data = {
+    userName: <ユーザ名>,
+    userId: <ユーザID>,
+    message: <入室メッセージ>,
+}
+*/
 socket.on('receiveEnterEvent', function (data) {
-    $('#thread').prepend('<p>' + data + '</p>');
+    $('#thread').prepend('<p>' + data.message + '</p>');
 });

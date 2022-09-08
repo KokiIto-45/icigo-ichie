@@ -23,7 +23,6 @@ function memo() {
         + '</p>'
         + '<p>' + message + '</p>'
     + '</div>');
-        
         $('#message').val("");
     }
 
