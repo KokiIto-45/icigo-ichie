@@ -34,19 +34,25 @@ $(function() {
     $(document).on('click', '.member-name', function(){
         // ユーザ名取得
         const toUserName = $(this).html();
-        const publishTypeDM = '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
+        const publishTypeMsgDM = '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
                             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>';
         // ユーザID取得
         const toUserId = $(this).next().val();
         
-        $('#publishType').html(publishTypeDM);
+        // 投稿タイプを「DM」に
+        $('#publishType').val('dm');
+        // 投稿タイプメッセージをDM用に
+        $('#publishTypeMsg').html(publishTypeMsgDM);
+        // ユーザIDを配置
         $('#toUserId').val(toUserId);
     });
 
     // DM解除ボタン押下時の処理
     $(document).on('click', '.btn-cancel-publish-type', function(){
         // 投稿タイプを「全員に」
-        $('#publishType').html('全員に送信');
+        $('#publishType').val('all');
+        // 投稿タイプメッセージを全員に送信用に
+        $('#publishTypeMsg').html('全員に送信');
         // DM先ユーザIDを空に
         $('#toUserId').val('');
     });
