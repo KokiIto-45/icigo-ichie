@@ -24,14 +24,8 @@ function publish() {
         // ダイレクトメッセージ先のユーザID取得
         toUserId = $('#toUserId').val();
     } else if (publishType === 'reply') {
-        // 返信先のユーザ名取得
-        toUserName = $('#toUserName').html();
         // 返信先の投稿内容取得
-        toText = $('#toText').val();
-        if (toText.length > 10) {
-            toText = toText.substring(0, 10);
-            toText += "...";
-        }
+        toText = $('#toText').html();
     }
 
     // 投稿内容を送信
@@ -78,13 +72,19 @@ $(function () {
     // 返信ボタン押下時の処理
     $(document).on('click', '.btn-change-type-reply', function () {
         // ユーザ名取得
-        const toUserName = $('.member-name').html();
+        const quoteUserName = $('.member-name').html();
+        const quotePublishDate = $('.member-name').next().next().html();
         // 投稿内容の取得
-        const toText = $('.publish').html();
+        const quoteMessage = $('.publish').html();
         // 投稿タイプメッセージ
-        const publishTypeMsgReply = '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へ返信' + '</div>'
+        const publishTypeMsgReply = '<div class="publish-type-msg-title">'
+            + '<div>' + '以下のメッセージに返信' + '</div>'
             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
-            + '<input id="toText" type="hidden" value="' + toText + '">';
+            + '</div>'
+            + '<div id="toText">' + '<blockquote style="margin:0;">'
+            + '<p>' + '<span style="margin-right:1rem; font-weight:700">' + quoteUserName + '</span>' + quotePublishDate + '</p>'
+            + '<p>' + quoteMessage + '</p>'
+            + '</blockquote>' + '</div>';
         // 投稿タイプを「返信」に
         $('#publishType').val('reply');
         // 投稿タイプメッセージを返信用に
@@ -122,10 +122,8 @@ socket.on('receiveMyMessageEvent', function (data) {
     } else if (data.publishType === 'reply' && data.toText) {
         // 返信の場合
         post += '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
-            + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.toUserName + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
-            + '<p class="badge badge-reply-text">' + data.toText + '</p>' + 'への返信'
+            + data.toText
             + '<p class="publish">' + data.message + '</p>'
             + '</div>';
         // 投稿タイプを「全員に」
@@ -160,10 +158,8 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // 返信の場合
         post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
-            + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
-            + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.toUserName + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
-            + '<p class="badge badge-reply-text">' + data.toText + '</p>' + 'への返信'
+            + data.toText
             + '<p class="publish">' + data.message + '</p>'
             + '<button type="button" class="btn-change-type-reply reply-button">返信</button>'
             + '</div>';
