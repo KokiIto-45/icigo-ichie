@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function (socket, io) {
+    const postDate = require('../public/javascripts/memo')
     /*
     投稿メッセージを送信する
     引数 data = {
@@ -16,16 +17,8 @@ module.exports = function (socket, io) {
         if (!data.message || !data.message.match(/\S/g)) {
             return;
         }
-
-        // 投稿日を取得
-        const date = new Date();
-        const nowDate = date.getFullYear()
-            + '/' + ('0' + (date.getMonth() + 1)).slice(-2)
-            + '/' + ('0' + date.getDate()).slice(-2)
-            + ' ' + ('0' + date.getHours()).slice(-2)
-            + ':' + ('0' + date.getMinutes()).slice(-2);
         // 投稿日を data に追加
-        data.publishDate = nowDate;
+        data.publishDate = postDate();
 
         //自分だけに送信するメッセージ表示イベント
         socket.emit('receiveMyMessageEvent',data);
