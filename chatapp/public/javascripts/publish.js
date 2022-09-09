@@ -77,7 +77,7 @@ $(function () {
         const quoteUserName = $('.member-name').html();
         const quotePublishDate = $('.member-name').next().next().html();
         // 投稿内容の取得
-        const quoteMessage = $('.publish').html();
+        const quoteMessage = $(this).parent().children('.publish').html();
         // 投稿タイプメッセージ
         const publishTypeMsgReply = '<div class="publish-type-msg-title">'
             + '<div>' + '以下のメッセージに返信' + '</div>'
