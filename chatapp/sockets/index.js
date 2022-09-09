@@ -1,5 +1,7 @@
 'use strict';
 
+let onlineUsers = [];
+
 module.exports = function (server) {
 
     const socketIo = require('socket.io')(server, { wsEngine: 'ws' });
@@ -10,9 +12,9 @@ module.exports = function (server) {
         require('./publish')(socket, io);
 
         // 入室モジュールの呼出
-        require('./enter')(socket, io);
+        require('./enter')(socket, io, onlineUsers);
 
         // 退室モジュールの呼出
-        require('./exit')(socket);
+        require('./exit')(socket, io, onlineUsers);
     });
 };

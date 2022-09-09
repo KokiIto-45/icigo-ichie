@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (socket, io) { 
+module.exports = function (socket, io, onlineUsers) { 
     /*
     入室メッセージをクライアントに送信する
     引数 data = {
@@ -15,6 +15,7 @@ module.exports = function (socket, io) {
         // socket ID 取得
         const userId = socket.id;
         data.userId = userId;
+        onlineUsers.push({ id: userId, name: data.userName });
 
         const message = '<span class="member-name">' + data.userName + 'さん' + '</span>'
                         + '<input type="hidden" value="' + data.userId + '">'
@@ -24,5 +25,6 @@ module.exports = function (socket, io) {
         socket.emit('receiveEnterEventMyself', data);
         // 他人への処理
         socket.broadcast.emit('receiveEnterEvent', data);
+        io.sockets.emit('appendOnlineUsersEvent', onlineUsers);
     });
 };
