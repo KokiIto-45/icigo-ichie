@@ -45,8 +45,8 @@ $(function () {
         }
     });
 
-    // 投稿のユーザ名クリック時の処理。その人へDMできるようにする。
-    $(document).on('click', '.member-name', function () {
+    // ユーザリストのユーザ名クリック時の処理。その人へDMできるようにする。
+    $(document).on('click', '.btn-change-type-dm', function () {
         // ユーザ名取得
         const toUserName = $(this).html();
         // ユーザID取得
