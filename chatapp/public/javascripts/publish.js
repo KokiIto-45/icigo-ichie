@@ -152,7 +152,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // ダイレクトメッセージの場合
         post += '<span class="badge badge-dm">DM</span>'
             + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p class="publish">' + data.message + '</p>'
@@ -161,7 +160,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // 返信の場合
         post += '<span class="badge badge-reply">Reply</span>'
             + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + data.toText
             + '<p class="publish">' + data.message + '</p>'
@@ -173,7 +171,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
         $('#publishTypeMsg').html('全員に送信');
     } else {
         post += '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p class="publish">' + data.message + '</p>'
