@@ -47,11 +47,11 @@ $(function () {
 
     // ユーザリストのユーザ名クリック時の処理。その人へDMできるようにする。
     $(document).on('click', '.btn-change-type-dm', function () {
-        // ユーザ名取得
+        // DM先ユーザ名取得
         const toUserName = $(this).html();
-        // ユーザID取得
+        // DM先ユーザID取得
         const toUserId = $(this).next().val();
-        // 投稿タイプメッセージ
+        // 投稿タイプDM メッセージ
         const publishTypeMsgDM = '<div class="publish-type-msg-title">'
             + '<div>' + '<span id="toUserName" class="member-msg">' + toUserName + '</span>' + 'へDM' + '</div>'
             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
@@ -73,12 +73,13 @@ $(function () {
 
     // 返信ボタン押下時の処理
     $(document).on('click', '.btn-change-type-reply', function () {
-        // ユーザ名取得
+        // 返信先ユーザ名取得
         const quoteUserName = $(this).parent().children().children('.member-msg').html();
+        // 返信先投稿日取得
         const quotePublishDate = $(this).parent().children().children('.member-msg').next().html();
-        // 投稿内容の取得
+        // 返信先投稿内容の取得
         const quoteMessage = $(this).parent().children('.publish').html();
-        // 投稿タイプメッセージ
+        // 投稿タイプ返信 メッセージ
         const publishTypeMsgReply = '<div class="publish-type-msg-title">'
             + '<div>' + '以下のメッセージに返信' + '</div>'
             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
