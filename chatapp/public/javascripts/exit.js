@@ -12,7 +12,7 @@ function exit() {
 
 // サーバから受信した退室メッセージを画面上に表示する
 socket.on('receiveExitRoomEvent', function (data) {
-    $('#thread').prepend('<span class="member-name">' + data.userName + 'さん' + '</span>'
+    $('#thread').prepend('<span class="member-msg">' + data.userName + 'さん' + '</span>'
     + '<span>が退室しました </span>'
     + '<span style="color:grey;">' + data.exitDate+ '</span>');
 });
