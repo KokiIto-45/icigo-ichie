@@ -74,8 +74,8 @@ $(function () {
     // 返信ボタン押下時の処理
     $(document).on('click', '.btn-change-type-reply', function () {
         // ユーザ名取得
-        const quoteUserName = $(this).parent().children().children('.member-name').html();
-        const quotePublishDate = $(this).parent().children().children('.member-name').next().next().html();
+        const quoteUserName = $(this).parent().children().children('.member-msg').html();
+        const quotePublishDate = $(this).parent().children().children('.member-msg').next().next().html();
         // 投稿内容の取得
         const quoteMessage = $(this).parent().children('.publish').html();
         // 投稿タイプメッセージ
@@ -117,7 +117,7 @@ socket.on('receiveMyMessageEvent', function (data) {
         post += '<span class="badge badge-dm">DM</span>'
             + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.toUserName + '</span>'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.toUserName + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + '<p class="publish">' + data.message + '</p>'
             + '</div>';
@@ -151,7 +151,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
     if (data.publishType === 'dm' && data.toUserId) {
         // ダイレクトメッセージの場合
         post += '<span class="badge badge-dm">DM</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
@@ -160,7 +160,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
     } else if (data.publishType === 'reply') {
         // 返信の場合
         post += '<span class="badge badge-reply">Reply</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + data.toText
@@ -172,7 +172,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // 投稿タイプメッセージを全員に送信用に
         $('#publishTypeMsg').html('全員に送信');
     } else {
-        post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+        post += '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'

@@ -17,7 +17,7 @@ module.exports = function (socket, io, onlineUsers) {
         data.userId = userId;
         onlineUsers.push({ id: userId, name: data.userName });
 
-        const message = '<span class="member-name">' + data.userName + 'さん' + '</span>'
+        const message = '<span class="member-msg">' + data.userName + 'さん' + '</span>'
                         + '<input type="hidden" value="' + data.userId + '">'
                         + '<span>が入室しました</span>';
         data.message = message;
