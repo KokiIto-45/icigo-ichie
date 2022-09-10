@@ -12,10 +12,16 @@ module.exports = function (socket, io, onlineUsers) {
             return;
         }
 
+        const counter = onlineUsers.findIndex(user => user.name === data.userName);
+        if (counter >= 0) {
+            socket.emit('handleEnterErrorEvent', {'error': 1});
+            return;
+        }
+
         // socket ID 取得
         const userId = socket.id;
         data.userId = userId;
-        onlineUsers.push({ id: userId, name: data.userName });
+        onlineUsers.push({ id: data.userId, name: data.userName });
 
         const message = '<span class="member-name">' + data.userName + 'さん' + '</span>'
                         + '<input type="hidden" value="' + data.userId + '">'

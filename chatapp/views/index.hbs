@@ -8,6 +8,11 @@
                 <div class="index-user_name">
                     <input type="text" id="userName" name="userName" class="index-user_name_text" placeholder="Username" pattern=".*\S+.*"  required>
                 </div>
+                {{#if errorMessage }}
+                <div style="color:red; font-weight:700;">
+                    {{ errorMessage }}
+                </div>
+                {{/if}}
                 <div class="index-enter">
                     <input type="button" value="Enter!" class="common-button index-enter_button" onclick="enter();">
                 </div>
