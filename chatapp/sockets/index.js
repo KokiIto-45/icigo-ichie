@@ -6,6 +6,7 @@ module.exports = function (server) {
 
     const socketIo = require('socket.io')(server, { wsEngine: 'ws' });
     const io = socketIo.listen(server);
+    const postDate = require('../public/javascripts/memo');
 
     io.sockets.on('connection', function (socket) {
         // 投稿モジュールの呼出
@@ -31,7 +32,7 @@ module.exports = function (server) {
                 onlineUsers.splice(index, 1);
             
                 // 退室処理
-                socket.broadcast.emit('receiveExitRoomEvent', `${userName}さんが退室しました。`);
+                socket.broadcast.emit('receiveExitRoomEvent', { userName: userName, exitDate: postDate() });
                 io.sockets.emit('deleteOnlineUsersEvent', onlineUsers);
             }
         });
