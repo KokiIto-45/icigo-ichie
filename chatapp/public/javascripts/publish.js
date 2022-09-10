@@ -75,7 +75,7 @@ $(function () {
     $(document).on('click', '.btn-change-type-reply', function () {
         // ユーザ名取得
         const quoteUserName = $(this).parent().children().children('.member-msg').html();
-        const quotePublishDate = $(this).parent().children().children('.member-msg').next().next().html();
+        const quotePublishDate = $(this).parent().children().children('.member-msg').next().html();
         // 投稿内容の取得
         const quoteMessage = $(this).parent().children('.publish').html();
         // 投稿タイプメッセージ
