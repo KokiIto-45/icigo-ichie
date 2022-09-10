@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function (socket, io, onlineUsers) { 
+    const enterDate = require('../public/javascripts/memo')
     /*
     入室メッセージをクライアントに送信する
     引数 data = {
@@ -18,7 +19,8 @@ module.exports = function (socket, io, onlineUsers) {
         onlineUsers.push({ id: userId, name: data.userName });
 
         const message = '<span class="member-msg">' + data.userName + 'さん' + '</span>'
-                        + '<span>が入室しました</span>';
+                        + '<span>が入室しました </span>'
+                        + '<span style="color:grey;">' + enterDate() + '</span>';
         data.message = message;
         // 自身への処理
         socket.emit('receiveEnterEventMyself', data);
