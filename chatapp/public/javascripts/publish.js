@@ -109,7 +109,7 @@ $(function () {
 // 自身への処理
 socket.on('receiveMyMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    let post = '<div>';
+    let post = '<div class="thread-container">';
     post += '<p style="margin: 0;">';
 
     if (data.publishType === 'dm' && data.toUserId) {
@@ -145,7 +145,7 @@ socket.on('receiveMyMessageEvent', function (data) {
 // 他人への処理
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    let post = '<div>';
+    let post = '<div class="thread-container">';
     post += '<p style="margin: 0;">';
 
     if (data.publishType === 'dm' && data.toUserId) {
