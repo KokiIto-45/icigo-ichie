@@ -12,7 +12,7 @@ function exit() {
 
 // サーバから受信した退室メッセージを画面上に表示する
 socket.on('receiveExitRoomEvent', function (data) {
-    $('#thread').prepend('<span class="member-name">' + data.userName + 'さん' + '</span>'
+    $('#thread').prepend('<span class="member-msg">' + data.userName + 'さん' + '</span>'
     + '<span>が退室しました </span>'
     + '<span style="color:grey;">' + data.exitDate+ '</span>');
 });
@@ -25,7 +25,7 @@ socket.on('deleteOnlineUsersEvent', function(data) {
             post += '<span class="my-msg" style="font-weight:700;">' + data[i].name + 'さん' + '</span>'
                     + '</p>';
         } else {
-            post += '<span class="member-msg member-name">' + data[i].name + 'さん' + '</span>'
+            post += '<span class="member-msg">' + data[i].name + 'さん' + '</span>'
                     + '<input type="hidden" value="' + data[i].id + '">'
                     + '</p>';
         }

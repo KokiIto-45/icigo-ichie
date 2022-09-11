@@ -9,7 +9,7 @@
         </div>
         <form method="post" action="/">
             <div class="room-login_user">
-                ログインユーザ：{{userName}}さん
+                ログインユーザ：<span class="my-msg">{{userName}}さん<span>
 
                 <input id="userName" type="hidden" value={{userName}}>
                 <input id="userId" type="hidden" value="">
@@ -54,19 +54,23 @@
     }
 
     .my-msg {
+        font-weight: 700;
         color: blue;
     }
 
     .member-msg {
+        font-weight: 700;
         color: black;
     }
 
-    .member-name {
+    .btn-change-type-dm {
         font-weight: 700;
         cursor: pointer;
+        color: #595757!important;
     }
 
-    .member-name:hover {
+    .btn-change-type-dm:hover {
+        color: black!important;
         text-decoration: underline;
     }
 

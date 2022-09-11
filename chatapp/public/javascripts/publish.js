@@ -45,15 +45,15 @@ $(function () {
         }
     });
 
-    // 投稿のユーザ名クリック時の処理。その人へDMできるようにする。
-    $(document).on('click', '.member-name', function () {
-        // ユーザ名取得
+    // ユーザリストのユーザ名クリック時の処理。その人へDMできるようにする。
+    $(document).on('click', '.btn-change-type-dm', function () {
+        // DM先ユーザ名取得
         const toUserName = $(this).html();
-        // ユーザID取得
+        // DM先ユーザID取得
         const toUserId = $(this).next().val();
-        // 投稿タイプメッセージ
+        // 投稿タイプDM メッセージ
         const publishTypeMsgDM = '<div class="publish-type-msg-title">'
-            + '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
+            + '<div>' + '<span id="toUserName" class="member-msg">' + toUserName + '</span>' + 'へDM' + '</div>'
             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
             + '</div>'
             + '<input id="toUserId" type="hidden" value="' + toUserId + '">';
@@ -73,12 +73,13 @@ $(function () {
 
     // 返信ボタン押下時の処理
     $(document).on('click', '.btn-change-type-reply', function () {
-        // ユーザ名取得
-        const quoteUserName = $(this).parent().children().children('.member-name').html();
-        const quotePublishDate = $(this).parent().children().children('.member-name').next().next().html();
-        // 投稿内容の取得
+        // 返信先ユーザ名取得
+        const quoteUserName = $(this).parent().children().children('.member-msg').html();
+        // 返信先投稿日取得
+        const quotePublishDate = $(this).parent().children().children('.member-msg').next().html();
+        // 返信先投稿内容の取得
         const quoteMessage = $(this).parent().children('.publish').html();
-        // 投稿タイプメッセージ
+        // 投稿タイプ返信 メッセージ
         const publishTypeMsgReply = '<div class="publish-type-msg-title">'
             + '<div>' + '以下のメッセージに返信' + '</div>'
             + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
@@ -117,7 +118,7 @@ socket.on('receiveMyMessageEvent', function (data) {
         post += '<span class="badge badge-dm">DM</span>'
             + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="margin-right:0.5rem;">' + 'to' + '</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.toUserName + '</span>'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.toUserName + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + '<p class="publish">' + data.message + '</p>'
             + '</div>';
@@ -151,8 +152,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
     if (data.publishType === 'dm' && data.toUserId) {
         // ダイレクトメッセージの場合
         post += '<span class="badge badge-dm">DM</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p class="publish">' + data.message + '</p>'
@@ -160,8 +160,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
     } else if (data.publishType === 'reply') {
         // 返信の場合
         post += '<span class="badge badge-reply">Reply</span>'
-            + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
+            + '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
             + data.toText
             + '<p class="publish">' + data.message + '</p>'
@@ -172,8 +171,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // 投稿タイプメッセージを全員に送信用に
         $('#publishTypeMsg').html('全員に送信');
     } else {
-        post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
+        post += '<span class="member-msg" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
             + '<p class="publish">' + data.message + '</p>'
