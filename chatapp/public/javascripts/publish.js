@@ -53,8 +53,7 @@ $(function () {
         const toUserId = $(this).next().val();
         // 投稿タイプメッセージ
         const publishTypeMsgDM = '<div class="publish-type-msg-title">'
-            + '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM' + '</div>'
-            + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
+            + '<div>' + '<span id="toUserName">' + toUserName + '</span>' + 'へDM ' + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'+'</div>'
             + '</div>'
             + '<input id="toUserId" type="hidden" value="' + toUserId + '">';
         // 投稿タイプを「DM」に
@@ -80,8 +79,7 @@ $(function () {
         const quoteMessage = $(this).parent().children('.publish').html();
         // 投稿タイプメッセージ
         const publishTypeMsgReply = '<div class="publish-type-msg-title">'
-            + '<div>' + '以下のメッセージに返信' + '</div>'
-            + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'
+            + '<div>' + 'メッセージに返信' + '<button type="button" class="btn-cancel-publish-type common-button">' + '解除' + '</button>'+'</div>'
             + '</div>'
             + '<div id="toText">' + '<blockquote style="margin:0;">'
             + '<p>' + '<span style="margin-right:1rem; font-weight:700">' + quoteUserName + '</span>' + quotePublishDate + '</p>'
@@ -145,39 +143,40 @@ socket.on('receiveMyMessageEvent', function (data) {
 // 他人への処理
 socket.on('receiveMemberMessageEvent', function (data) {
     // 画面上にメッセージを表示
-    let post = '<div class="thread-container">';
+    let post = '<div class="reply-thread-container">';
     post += '<p style="margin: 0;">';
 
     if (data.publishType === 'dm' && data.toUserId) {
         // ダイレクトメッセージの場合
-        post += '<span class="badge badge-dm">DM</span>'
+        post += '<div style="margin:0;">'+'<span class="badge badge-dm">DM</span>'
             + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</p>'
-            + '<p class="publish">' + data.message + '</p>'
+            + '<p class="publish">' + data.message + '</p>'+'</div>'
             + '</div>';
     } else if (data.publishType === 'reply') {
         // 返信の場合
-        post += '<span class="badge badge-reply">Reply</span>'
+        post += '<div style="margin:0;">'+'<span class="badge badge-reply">Reply</span>'
             + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
-            + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
-            + data.toText
-            + '<p class="publish">' + data.message + '</p>'
+            + '<span style="color:grey;">' + data.publishDate + '</span>' 
             + '<button type="button" class="btn-change-type-reply reply-button">返信</button>'
+            + '</p>'
+            + data.toText
+            + '<p class="publish">' + data.message + '</p>'+'</div>'
             + '</div>';
         // 投稿タイプを「全員に」
         $('#publishType').val('all');
         // 投稿タイプメッセージを全員に送信用に
         $('#publishTypeMsg').html('全員に送信');
     } else {
-        post += '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
+        post += '<div style="margin:0;">'+'<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
-            + '</p>'
-            + '<p class="publish">' + data.message + '</p>'
             + '<button type="button" class="btn-change-type-reply reply-button">返信</button>'
+            + '</p>'
+            + '<p class="publish">' + data.message + '</p>'+'</div>'
             + '</div>';
     }
 

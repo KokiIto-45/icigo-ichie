@@ -1,8 +1,8 @@
 <div class="header-container">
     <div class="header-left">
-        <span class="logo">NodeChatチャットルーム</span>
+        <span class="logo">NodeChat</span>
     </div>
-    <div class="header-center"></div>
+    <div class="header-center"><span class="center-logo">NodeChat</span></div>
     <div class="header-right">
         <div class="room-exit">
             <input type="button" value="Logout" class="room-exit_button" onclick="exit();">
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="left-container">
             <div class="user-header">
-                <h2 class="h4 pt-3 pl-2">入室中のユーザ</h2>
+                <p class="user-title">入室中のユーザ</p>
             </div>
             <div id="onlineUsers"></div>
         </div>
@@ -46,7 +46,7 @@
        
     </div>
 </div>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <script src="/javascripts/socket.js"></script>
 <script src="/javascripts/enter.js"></script>
 <script src="/javascripts/publish.js"></script>
@@ -160,7 +160,9 @@ blockquote p {
 }
 .home-container{
     margin-top:0;
+    margin-bottom:0;
     padding-top:4em;
+    height:100%;
     width: 100%;
     background-color: #f3f4f6;
 }   
@@ -180,6 +182,8 @@ blockquote p {
     margin:10px 0 5px 5px;
     height: 60px;
     width: 100%;
+    font-size:25px;
+    padding:10px 5px 0px 10px;
 }
 #onlineUsers{
     margin-left:20px;
@@ -197,5 +201,40 @@ blockquote p {
     border-radius:10px;
     background-color:white;
     margin-bottom:20px;
+}
+.reply-thread-container{
+    margin-top:0;
+    padding:10px 20px 2px 20px;
+    border-radius:10px;
+    background-color:white;
+    margin-bottom:20px;
+    display:flex;
+
+}
+.center-logo{
+    color:transparent
+}
+@media screen and (max-width: 959px) {
+    .user-header{
+        font-size:19px
+    }
+}
+@media screen and (max-width: 480px) {
+  /* 480px以下に適用されるCSS（スマホ用） */
+    .logo{
+        display:none
+    }
+    .left-container{
+        display:none;
+    }
+    .center-logo{
+        font-size: 24px;
+        color: white;
+        font-weight: bold;
+        margin-left: 20px;
+    }
+    .home-container{
+        height:100vh;
+    }
 }
 </style>
