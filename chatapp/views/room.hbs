@@ -1,7 +1,15 @@
-<div class="container">
-    <div class="row">
-        <h1>Node Chat チャットルーム</h1>
+<div class="header-container">
+    <div class="header-left">
+    <span class="logo">NodeChatチャットルーム</span>
     </div>
+    <div class="header-center"></div>
+    <div class="header-right">
+         <div class="room-exit">
+                <input type="button" value="Logout" class="room-exit_button" onclick="exit();">
+            </div>
+    </div>
+</div>
+<div class="container">
     <div class="row">
         <div class="mr-5 p-3" style="border:3px #ccc solid">
             <h2 class="h4 text-center">ユーザ</h2>
@@ -83,5 +91,33 @@
 }
 .badge-dm {
     background-color: #634ecc;
+}
+.header-container{
+    background-color:#2476F2;
+    height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  margin-top:0;
+}
+.header-left{
+    flex:4;
+}
+.logo{
+      font-size: 24px;
+  color: white;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.header-center{
+    flex: 7;
+}
+.header-right{
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 </style>
