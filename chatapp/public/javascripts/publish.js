@@ -153,7 +153,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
         // ダイレクトメッセージの場合
         post += '<div style="margin:0;">'+'<span class="badge badge-dm">DM</span>'
             + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>'
             + '</div>'
             + '<p class="publish">' + data.message + '</p>'+'</div>'
@@ -161,7 +160,6 @@ socket.on('receiveMemberMessageEvent', function (data) {
     } else if (data.publishType === 'reply') {
         post += '<span class="badge badge-reply">REPLY</span>'
             + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
-            + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>' 
             + '<p>'+data.toText+'</p>'
             + '<p class="publish">' + data.message + '</p>'
