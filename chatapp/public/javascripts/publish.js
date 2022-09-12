@@ -123,10 +123,10 @@ socket.on('receiveMyMessageEvent', function (data) {
             + '</div>';
     } else if (data.publishType === 'reply' && data.toText) {
         // 返信の場合
-        post += '<span class="badge badge-reply">Reply</span>'
+        post += '<span class="badge badge-reply">REPLY</span>'
             + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
-            + data.toText
+            + '<p>'+data.toText+'</p>'
             + '<p class="publish">' + data.message + '</p>'
             + '</div>';
         // 投稿タイプを「全員に」
@@ -159,7 +159,7 @@ socket.on('receiveMemberMessageEvent', function (data) {
             + '<p class="publish">' + data.message + '</p>'+'</div>'
             + '</div>';
     } else if (data.publishType === 'reply') {
-        post += '<span class="badge badge-reply">Reply</span>'
+        post += '<span class="badge badge-reply">REPLY</span>'
             + '<span class="member-msg member-name" style="margin-right:1rem;">' + data.userName + 'さん' + '</span>'
             + '<input type="hidden" value="' + data.userId + '">'
             + '<span style="color:grey;">' + data.publishDate + '</span>' 
