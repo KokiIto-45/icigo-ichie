@@ -10,6 +10,10 @@ function enter() {
     socket.emit('enter', {'userName': userName});
 }
 
+socket.on('handleEnterErrorEvent', function (data) {
+    location.href = `/?e=${data.error}`;
+});
+
 /*
 自身への処理。自身のuserIdを格納する。
 引数 data = {
