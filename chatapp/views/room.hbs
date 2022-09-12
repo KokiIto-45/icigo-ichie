@@ -1,40 +1,52 @@
-<div class="container">
-    <div class="row">
-        <h1>Node Chat チャットルーム</h1>
+<div class="header-container">
+    <div class="header-left">
+        <span class="logo">NodeChat</span>
     </div>
-    <div class="row">
-        <div class="mr-5 p-3" style="border:3px #ccc solid">
-            <h2 class="h4 text-center">ユーザ</h2>
-            <div id="onlineUsers"></div>
+    <div class="header-center"><span class="center-logo">NodeChat</span></div>
+    <div class="header-right">
+        <div class="room-exit">
+            <input type="button" value="Logout" class="room-exit_button" onclick="exit();">
         </div>
-        <form method="post" action="/">
-            <div class="room-login_user">
-                ログインユーザ：<span class="my-msg">{{userName}}さん<span>
-
-                <input id="userName" type="hidden" value={{userName}}>
-                <input id="userId" type="hidden" value="">
-            </div>
-            <div style="margin:0;">
-                <input id="publishType" type="hidden" value="all">
-                <div id="publishTypeMsg" style="margin:0;">全員に送信</div>
-            </div>
-            <div class="room-message">
-                <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
-            </div>
-            <div class="room-submit">
-                <input type="button" value="投稿" class="common-button room-publish_button" onclick="publish();">
-                <input type="button" value="メモ" class="common-button room-memo_button" onclick="memo();">
-            </div>
-            <div class="room-thread">
-                <div id="thread"></div>
-            </div>
-            <div class="room-exit">
-                <input type="button" value="退室する" class="common-button room-exit_button" onclick="exit();">
-            </div>
-        </form>
     </div>
 </div>
+<div class="home-container">
+    <div class="row">
+        <div class="left-container">
+            <div class="user-header">
+                <p class="user-title">入室中のユーザ</p>
+            </div>
+            <div id="onlineUsers"></div>
+        </div>
+        <div class="middle-container">
+            <form method="post" action="/">
+            <div class="post-container">
+                <div class="room-login_user">
+                    ログインユーザ：{{userName}}さん
 
+                    <input id="userName" type="hidden" value={{userName}}>
+                    <input id="userId" type="hidden" value="">
+                </div>
+                <div style="margin:0;">
+                    <input id="publishType" type="hidden" value="all">
+                    <div id="publishTypeMsg" style="margin:0;">全員に送信</div>
+                </div>
+                <div class="room-message">
+                    <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
+                </div>
+                <div class="room-submit">
+                    <input type="button" value="投稿" class="common-button room-publish_button" onclick="publish();">
+                    <input type="button" value="メモ" class="common-button room-memo_button" onclick="memo();">
+                </div>
+            </div>
+                <div class="room-thread">
+                    <div id="thread"></div>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <script src="/javascripts/socket.js"></script>
 <script src="/javascripts/enter.js"></script>
 <script src="/javascripts/publish.js"></script>
@@ -42,18 +54,7 @@
 <script src="/javascripts/exit.js"></script>
 
 <style>
-    blockquote {
-        border-left: 4px grey solid;
-        padding-left: 1rem;
-        color: grey;
-        font-size: 13px;
-    }
-
-    blockquote p {
-        margin: 0;
-    }
-
-    .my-msg {
+  .my-msg {
         font-weight: 700;
         color: blue;
     }
@@ -72,11 +73,6 @@
     .btn-change-type-dm:hover {
         color: black!important;
         text-decoration: underline;
-    }
-
-    #publishTypeMsg .publish-type-msg-title {
-        display: flex;
-        justify-content: space-between;
     }
 
     #publishTypeMsg div {
@@ -99,32 +95,155 @@
 
     .badge {
         background-color: grey;
+    color: white;
+    border-radius: 7px; 
+    font-size: 12px;
+    margin-right: 0.5rem;
+}
+.badge-dm {
+    background-color: #634ecc;
+}
+.header-container{
+    background-color:#2476F2;
+    height: 4em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  margin-top:0;
+  margin-bottom:0;
+}
+.header-left{
+    flex:4;
+}
+.logo{
+      font-size: 24px;
+  color: white;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.header-center{
+    flex: 7;
+}
+.header-right{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+blockquote {
+    border-left: 4px grey solid;
+    padding-left: 1rem;
+    color: grey;
+    font-size: 13px;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+#publishTypeMsg .publish-type-msg-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge-reply {
+    background-color: #4ecc91;
+}
+
+.reply-button {
+    margin-top:4px;
+    background-color: #a8c7f7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+    color: white;
+    height: 25px
+}
+
+.badge-reply-text {
+    background-color: #d2dad5;
+    color: white;
+}
+.home-container{
+    margin-top:0;
+    margin-bottom:0;
+    padding-top:4em;
+    height:100%;
+    width: 100%;
+    background-color: #f3f4f6;
+}   
+.left-container{
+    flex:2.5;
+    margin-top:0;
+    height: 100vh;
+}
+.middle-container{
+    margin: 10px 20px 20px 20px;
+    top:0;
+    flex:9.5;
+    border-radius:10px
+}
+
+.user-header{
+    margin:10px 0 5px 5px;
+    height: 60px;
+    width: 100%;
+    font-size:25px;
+    padding:10px 5px 0px 10px;
+}
+#onlineUsers{
+    margin-left:20px;
+    font-size:20px;
+}
+.post-container{
+    margin:0;
+    padding:5px 20px 5px 20px;
+    border-radius:10px;
+    background-color:white;
+}
+.thread-container{
+    margin-top:0;
+    padding:10px 20px 2px 20px;
+    border-radius:10px;
+    background-color:white;
+    margin-bottom:20px;
+}
+.reply-thread-container{
+    margin-top:0;
+    padding:10px 20px 10px 20px;
+    border-radius:10px;
+    background-color:white;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+}
+.center-logo{
+    color:transparent
+}
+@media screen and (max-width: 959px) {
+    .user-header{
+        font-size:19px
+    }
+    .home-container{
+        min-height:100vh;
+    }
+}
+@media screen and (max-width: 480px) {
+  /* 480px以下に適用されるCSS（スマホ用） */
+    .logo{
+        display:none
+    }
+    .left-container{
+        display:none;
+    }
+    .center-logo{
+        font-size: 24px;
         color: white;
-        border-radius: 7px;
-        font-size: 12px;
-        margin-right: 0.5rem;
+        font-weight: bold;
+        margin-left: 20px;
     }
-
-    .badge-dm {
-        background-color: #634ecc;
-    }
-
-    .badge-reply {
-        background-color: #4ecc91;
-    }
-
-    .reply-button {
-        background-color: #a8c7f7;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: 500;
-        font-size: 15px;
-        color: white;
-    }
-
-    .badge-reply-text {
-        background-color: #d2dad5;
-        color: white;
-    }
+}
 </style>
