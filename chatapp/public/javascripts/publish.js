@@ -126,7 +126,7 @@ socket.on('receiveMyMessageEvent', function (data) {
         post += '<span class="badge badge-reply">REPLY</span>'
             + '<span class="my-msg" style="font-weight:700; margin-right:0.5rem;">' + data.userName + 'さん' + '</span>'
             + '<span style="color:grey;">' + data.publishDate + '</span>' + '</p>'
-            + data.toText
+            + '<p>'+data.toText+'</p>'
             + '<p class="publish">' + data.message + '</p>'
             + '</div>';
         // 投稿タイプを「全員に」
