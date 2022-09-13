@@ -1,6 +1,7 @@
 <div class="header-container">
     <div class="header-left">
         <span class="logo">NodeChat</span>
+        <button href="#fuu" type="button" class="user-menu-for-smart-phone"><img src="assets/bars_24.png" alt="開く"  height="30" width="30"></button>
     </div>
     <div class="header-center"><span class="center-logo">NodeChat</span></div>
     <div class="header-right">
@@ -11,39 +12,38 @@
 </div>
 <div class="home-container">
     <div class="row">
-        <div class="left-container">
+        <div id="fuu" class="left-container">
             <div class="user-header">
-                <p class="user-title">入室中のユーザ</p>
+                <p class="user-title">入室中</p>
             </div>
             <div id="onlineUsers"></div>
         </div>
         <div class="middle-container">
             <form method="post" action="/">
-            <div class="post-container">
-                <div class="room-login_user">
-                    ログインユーザ：{{userName}}さん
+                <div class="post-container">
+                    <div class="room-login_user">
+                        ログインユーザ：{{userName}}さん
 
-                    <input id="userName" type="hidden" value={{userName}}>
-                    <input id="userId" type="hidden" value="">
+                        <input id="userName" type="hidden" value={{userName}}>
+                        <input id="userId" type="hidden" value="">
+                    </div>
+                    <div style="margin:0;">
+                        <input id="publishType" type="hidden" value="all">
+                        <div id="publishTypeMsg" style="margin:0;">全員に送信</div>
+                    </div>
+                    <div class="room-message">
+                        <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
+                    </div>
+                    <div class="room-submit">
+                        <input type="button" value="投稿" class="common-button room-publish_button" onclick="publish();">
+                        <input type="button" value="メモ" class="common-button room-memo_button" onclick="memo();">
+                    </div>
                 </div>
-                <div style="margin:0;">
-                    <input id="publishType" type="hidden" value="all">
-                    <div id="publishTypeMsg" style="margin:0;">全員に送信</div>
-                </div>
-                <div class="room-message">
-                    <textarea id="message" rows="4" class="room-message_textarea" placeholder="投稿文を入力してください"></textarea>
-                </div>
-                <div class="room-submit">
-                    <input type="button" value="投稿" class="common-button room-publish_button" onclick="publish();">
-                    <input type="button" value="メモ" class="common-button room-memo_button" onclick="memo();">
-                </div>
-            </div>
                 <div class="room-thread">
                     <div id="thread"></div>
                 </div>
             </form>
         </div>
-       
     </div>
 </div>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -52,7 +52,7 @@
 <script src="/javascripts/publish.js"></script>
 <script src="/javascripts/memo.js"></script>
 <script src="/javascripts/exit.js"></script>
-
+<script src="/javascripts/userlist.js"></script>
 <style>
   .my-msg {
         font-weight: 700;
@@ -165,6 +165,10 @@ blockquote p {
     min-width: 50px;
 }
 
+.reply-button:focus{
+    outline:none;
+}
+
 .badge-reply-text {
     background-color: #d2dad5;
     color: white;
@@ -181,6 +185,7 @@ blockquote p {
     flex:2.5;
     margin-top:0;
     height: 100vh;
+    display:block;
 }
 .middle-container{
     margin: 10px 20px 20px 20px;
@@ -225,6 +230,19 @@ blockquote p {
 .center-logo{
     color:transparent
 }
+
+.user-menu-for-smart-phone{
+    height:30px;
+    width:30px;
+    display:none;
+    padding:0;
+}
+.user-menu-for-smart-phone img{
+    height:100%;
+    width:100%;
+    background-color:transparent;
+}
+
 @media screen and (max-width: 959px) {
     .user-header{
         font-size:19px
@@ -240,12 +258,37 @@ blockquote p {
     }
     .left-container{
         display:none;
+        flex:5;
     }
     .center-logo{
         font-size: 24px;
         color: white;
         font-weight: bold;
         margin-left: 20px;
+    }
+
+    .user-menu-for-smart-phone{
+        margin-left:10px;
+        display:block;
+        background:transparent;
+        border:none;
+        transition: background-color .3s;
+        border-radius: 50%;
+    }
+
+    .user-menu-for-smart-phone:focus{
+        outline:0;
+        background: rgba(243, 245, 248, 0.4);
+    }
+
+    .user-title{
+        font-size:18px;
+    }
+    
+    #onlineUsers{
+        margin-left:20px;
+        margin-top:0;
+        font-size:15px;
     }
 }
 </style>
